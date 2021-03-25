@@ -1,0 +1,27 @@
+name: outage
+
+channels:
+  - conda-forge
+  - fastai
+  
+dependencies:
+  - python=3.7
+  - pandas
+  - matplotlib
+  - jupyterlab
+  - seaborn
+  - nbdev
+  - lxml
+  - beautifulsoup4
+  - mkdocs
+  - mkdocs-material
+  - pip
+  
+  - pip:
+      - -e .
+      - mkdocs-material-extensions
+      - mkdocstrings
+      - configparser
+      - junix
+      - ipypb
+      - feautils
