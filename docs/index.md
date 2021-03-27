@@ -1,23 +1,16 @@
 # Outage Map
 
-<link rel="stylesheet" href="./Leaflet-1.0.3/leaflet.css"/>
-<script src="./Leaflet-1.0.3/leaflet.js"></script>
-<style>
-#map{ height: 100% }
-</style>
-
 <div id="map"></div>
 
-<!-- <script type="text/javascript">
-    // Initialize a map centered at (53, 12) at zoom level 5
-    var map = L.map('map').setView([53, 12], 5);
+<script type="text/javascript">
+    var mymap = L.map('map').setView([51.505, -0.09], 13);
 
-    // Style URL format in XYZ PNG format; see our documentation for more options
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-        maxZoom: 20,
-        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
-    }).addTo(map);
-</script> -->
-
-<script type="text/javascript">var mymap = L.map('map').setView([51.5, 0], 13);</script>
-<!-- <script type="text/javascript" src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script> -->
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiZW5lcmd5dmlzIiwiYSI6ImNrbW9waTA3MjExaHMycG16eDM1b2pudGQifQ.qVmU0EfaBJRhN0Nrf1jvow'
+}).addTo(mymap);
+</script>
