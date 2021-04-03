@@ -1,5 +1,5 @@
 # Project specific
-cableopt-data/**
+data/spatial/**
 
 *.bak
 .gitattributes
