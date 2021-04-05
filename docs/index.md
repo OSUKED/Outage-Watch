@@ -20,7 +20,7 @@
       id: 'mapbox/streets-v11',
       tileSize: 512,
       zoomOffset: -1,
-      accessToken: 'pk.eyJ1IjoiZW5lcmd5dmlzIiwiYSI6ImNrbW9waTA3MjExaHMycG16eDM1b2pudGQifQ.qVmU0EfaBJRhN0Nrf1jvow'
+      accessToken: 'pk.eyJ1IjoiZW5lcmd5dmlzIiwiYSI6ImNrbjR2aWo4azBsaHEycHM5dHByZzFnZW8ifQ.MyLCIQqHnNHQFWJQqs-j4w'
     }).addTo(mymap);
   })
 </script>

@@ -6,6 +6,7 @@ index = {"extract_single_incident_ids": "01-retrieval.ipynb",
          "extract_multiple_incident_urls": "01-retrieval.ipynb",
          "extract_multiple_incident_ids": "01-retrieval.ipynb",
          "get_incident_detail_url": "01-retrieval.ipynb",
+         "is_ukpn_incident_active": "01-retrieval.ipynb",
          "extract_relevant_info": "01-retrieval.ipynb",
          "get_ukpn_incidents_info": "01-retrieval.ipynb",
          "save_json_data": "01-retrieval.ipynb",
@@ -14,9 +15,12 @@ index = {"extract_single_incident_ids": "01-retrieval.ipynb",
          "get_wpd_incident_feed": "01-retrieval.ipynb",
          "wpd_incident_id_to_url": "01-retrieval.ipynb",
          "clean_wpd_incident_info": "01-retrieval.ipynb",
-         "get_wpd_incidents_info": "01-retrieval.ipynb"}
+         "get_wpd_incidents_info": "01-retrieval.ipynb",
+         "collate_cleaned_incidents_info": "02-collation.ipynb",
+         "PostCodeLocator": "02-collation.ipynb"}
 
-modules = ["retrieval.py"]
+modules = ["retrieval.py",
+           "collation.py"]
 
 doc_url = "https://AyrtonB.github.io/outage/"
 
