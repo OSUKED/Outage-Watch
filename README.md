@@ -6,7 +6,7 @@
 
 To Do:
 
-- [ ] Add an outage map to the documentation, example [here](https://groups.google.com/g/mkdocs/c/qvwXYRuDM-M?pli=1)
+- [x] Add an outage map to the documentation, example [here](https://groups.google.com/g/mkdocs/c/qvwXYRuDM-M?pli=1)
 - [ ] Make sure that all of the raw and cleaned JSON data is available from the GitHub pages site
 
 <br>
