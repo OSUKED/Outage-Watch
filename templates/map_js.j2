@@ -6,7 +6,7 @@ var MarkerIcon = L.Icon.extend({
     }
 });
 
-var boltIcon = new MarkerIcon({iconUrl: 'img/bolt.png'});
+var boltIcon = new MarkerIcon({iconUrl: 'img/coloured_bolt.png'});
 var mymap = L.map('map').setView({{ center }}, {{ zoom }});
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
