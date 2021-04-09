@@ -5,7 +5,9 @@ __all__ = ['extract_ukpn_single_incident_ids', 'extract_ukpn_multiple_incident_u
            'extract_ukpn_relevant_info', 'get_ukpn_incidents_info', 'save_json_data', 'clean_ssen_incident_info',
            'get_ssen_incidents_info', 'get_wpd_incident_feed', 'wpd_incident_id_to_url', 'clean_wpd_incident_info',
            'get_wpd_incidents_info', 'get_raw_sp_incidents_info', 'clean_sp_incident_info', 'get_sp_incidents_info',
-           'get_np_auth', 'get_np_r', 'get_np_raw_incidents_info', 'clean_np_incident_info', 'get_np_incidents_info']
+           'get_np_auth', 'get_np_r', 'get_np_raw_incidents_info', 'clean_np_incident_info', 'get_np_incidents_info',
+           'get_enw_incidents_page', 'check_num_results', 'get_enw_raw_incidents', 'clean_enw_incident_info',
+           'get_enw_incidents_info']
 
 # Cell
 import json
@@ -264,7 +266,7 @@ def clean_np_incident_info(incident_info):
         if dt is None:
             return ''
         else:
-            return pd.to_datetime(incident_info['logged'], unit='ms').strftime('%Y-%m-%d %H:%M')
+            return pd.to_datetime(dt, unit='ms').strftime('%Y-%m-%d %H:%M')
 
     cleaned_incident_info = dict()
 
@@ -289,5 +291,56 @@ def get_np_incidents_info(
 
     for incident_id, incident_info in raw_incidents_info['powercuts'].items():
         cleaned_incidents_info[incident_id] = clean_np_incident_info(incident_info)
+
+    return raw_incidents_info, cleaned_incidents_info
+
+# Cell
+get_enw_incidents_page = lambda page=1, page_size=10000: f'https://www.enwl.co.uk/power-outages/search?pageSize={page_size}&postcodeOrReferenceNumber=&pageNumber={page}&includeCurrent=true&includeResolved=true&includeTodaysPlanned=true&includeFuturePlanned=true&includeCancelledPlanned=true'
+
+# Cell
+def check_num_results(r_json):
+    num_total_results = r_json['TotalResults']
+    num_results_returned = len(r_json['Items'])
+
+    if num_total_results != num_results_returned:
+        warn(f'Only {num_results_returned} items were returned for Electricity North West when there are {num_total_results} in total')
+
+    return
+
+# Cell
+def get_enw_raw_incidents(page=1, page_size=10000):
+    url = get_enw_incidents_page(page=page, page_size=page_size)
+    raw_incidents = requests.get(url).json()
+    check_num_results(raw_incidents)
+
+    return raw_incidents
+
+# Cell
+def clean_enw_incident_info(incident_info):
+    def clean_dt(dt):
+        if dt is None:
+            return ''
+        else:
+            return pd.to_datetime(dt).strftime('%Y-%m-%d %H:%M')
+
+    cleaned_incident_info = dict()
+    cleaned_incident_info['received_time'] = clean_dt(incident_info['date'])
+    cleaned_incident_info['estimated_restored_time'] = clean_dt(incident_info['estimatedTimeOfRestorationMajority'])
+    cleaned_incident_info['postcodes_impacted'] = incident_info['AffectedPostcodes'].strip().split(', ')
+    cleaned_incident_info['description'] = incident_info['AdditionalFaultInfo']
+    cleaned_incident_info['incident_active'] = incident_info['FaultLabel'] in ['CurrentFault', 'Live power cut']
+    cleaned_incident_info['incident_url'] = 'https://www.enwl.co.uk/power-cuts/power-cuts-power-cuts-live-power-cut-information-fault-list/fault-list'
+
+    return cleaned_incident_info
+
+# Cell
+def get_enw_incidents_info(page=1, page_size=10000):
+    cleaned_incidents_info = dict()
+
+    raw_incidents_info = get_enw_raw_incidents(page=page, page_size=page_size)
+
+    for incident_info in raw_incidents_info['Items']:
+        incident_id = incident_info['faultNumber']
+        cleaned_incidents_info[incident_id] = clean_enw_incident_info(incident_info)
 
     return raw_incidents_info, cleaned_incidents_info

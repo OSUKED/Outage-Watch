@@ -20,6 +20,9 @@ extra:
   
 plugins:
   - search
+  
+markdown_extensions:
+  - attr_list
 
 extra_css:
   - https://unpkg.com/leaflet@1.3.1/dist/leaflet.css

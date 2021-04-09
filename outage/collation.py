@@ -3,7 +3,7 @@
 __all__ = ['collate_cleaned_incidents_info', 'get_combined_outages_df', 'PostCodeLocator']
 
 # Cell
-def collate_cleaned_incidents_info(dnos=['ukpn', 'ssen', 'wpd', 'sp']):
+def collate_cleaned_incidents_info(dnos=['ukpn', 'ssen', 'wpd', 'sp', 'np', 'enw']):
     cleaned_incidents_info = dict()
 
     for dno in track(dnos, label='DNOs'):
