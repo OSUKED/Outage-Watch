@@ -16,6 +16,7 @@ dependencies:
   - mkdocs
   - mkdocs-material
   - geopandas
+  - tabulate
   - pip
   
   - pip:
