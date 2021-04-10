@@ -27,7 +27,7 @@ jobs:
           pip install -e .
           pip install mkdocs==1.1.2 mkdocs-material==7.1.1 mkdocs-material-extensions==1.0.1 mkdocstrings==0.15.0 ipython==7.21.0
           python -m outage.deployment
-          mkdocs gh-deploy
+          mkdocs gh-deploy --force
       
       - name: Saving changes to repo
         uses: stefanzweifel/git-auto-commit-action@v4 
