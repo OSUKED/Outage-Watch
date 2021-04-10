@@ -15,6 +15,7 @@ dependencies:
   - beautifulsoup4
   - mkdocs
   - mkdocs-material
+  - typer
   - geopandas
   - tabulate
   - pip

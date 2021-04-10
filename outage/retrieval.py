@@ -234,7 +234,7 @@ def get_np_auth(np_main_url='https://www.northernpowergrid.com/power-cuts'):
     s = requests.Session()
 
     r = s.get(np_main_url)
-    soup = bs(r.text)
+    soup = bs(r.text, features='lxml')
 
     authenticity_token = soup.find('input', attrs={'name': 'authenticityToken'})['value']
 

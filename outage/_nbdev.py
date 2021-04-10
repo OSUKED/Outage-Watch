@@ -31,10 +31,22 @@ index = {"extract_ukpn_single_incident_ids": "01-retrieval.ipynb",
          "get_enw_incidents_info": "01-retrieval.ipynb",
          "collate_cleaned_incidents_info": "02-collation.ipynb",
          "get_combined_outages_df": "02-collation.ipynb",
-         "PostCodeLocator": "02-collation.ipynb"}
+         "check_postcode_is_in_df": "02-collation.ipynb",
+         "get_postcode_location_df": "02-collation.ipynb",
+         "get_postcode_url": "02-collation.ipynb",
+         "get_postcode_location_api": "02-collation.ipynb",
+         "PostCodeLocator": "02-collation.ipynb",
+         "add_outage_longitudes_latitudes": "02-collation.ipynb",
+         "construct_outages_gdf": "02-collation.ipynb",
+         "generate_map_js": "02-collation.ipynb",
+         "clean_outages_df": "02-collation.ipynb",
+         "generate_index_md": "02-collation.ipynb",
+         "app": "03-deployment.ipynb",
+         "update_docs": "03-deployment.ipynb"}
 
 modules = ["retrieval.py",
-           "collation.py"]
+           "collation.py",
+           "deployment.py"]
 
 doc_url = "https://AyrtonB.github.io/outage/"
 
