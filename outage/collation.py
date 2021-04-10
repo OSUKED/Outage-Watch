@@ -173,7 +173,7 @@ def clean_outages_df(df_outages):
     df_outages_clean['Operator'] = df_outages['dno'].str.upper()
     df_outages_clean['Description'] = df_outages['description'].str.replace('\n', '<br>')
 
-    df_outages_clean = df_outages_clean.sort_values('Received Time', ascending=False)
+    df_outages_clean = df_outages_clean.sort_values('Estimated Start Time', ascending=False)
 
     return df_outages_clean
 
