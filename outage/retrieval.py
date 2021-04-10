@@ -101,7 +101,7 @@ def get_ukpn_incidents_info(incidents_url='https://www.ukpowernetworks.co.uk/Inc
     return raw_incidents_info, cleaned_incidents_info
 
 # Cell
-def save_json_data(data, filename, data_dir='../data/raw'):
+def save_json_data(data, filename, data_dir='data/raw'):
     with open(f'{data_dir}/{filename}.json', 'w') as fp:
         json.dump(data, fp)
 
