@@ -13,7 +13,7 @@ app = typer.Typer()
 # Cell
 @app.command()
 def update_docs(
-    dnos=['ukpn', 'wpd', 'sp', 'np', 'enw'], # , 'ssen'
+    dnos=['ssen', 'wpd', 'sp', 'np', 'enw'], # , 'ukpn'
     postcodes_fp='data/postcodes.csv',
     outages_fp='docs/data/outages.csv',
     null_threshold=1,
