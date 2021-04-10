@@ -13,14 +13,14 @@ app = typer.Typer()
 # Cell
 @app.command()
 def update_docs(
-    dnos: list=['ukpn', 'ssen', 'wpd', 'sp', 'np', 'enw'],
-    postcodes_fp: str='data/postcodes.csv',
-    outages_fp: str='docs/data/outages.csv',
-    null_threshold: int=1,
-    js_template_fp: str='templates/map_js.j2',
-    js_docs_fp: str='docs/map.js',
-    md_template_fp: str='templates/index_md.j2',
-    docs_md_fp: str='docs/index.md'
+    dnos=['ukpn', 'ssen', 'wpd', 'sp', 'np', 'enw'],
+    postcodes_fp='data/postcodes.csv',
+    outages_fp='docs/data/outages.csv',
+    null_threshold=1,
+    js_template_fp='templates/map_js.j2',
+    js_docs_fp='docs/map.js',
+    md_template_fp='templates/index_md.j2',
+    docs_md_fp='docs/index.md'
 ):
     # Retrieving and parsing outage data
     cleaned_incidents_info = collation.collate_cleaned_incidents_info(dnos=dnos)
