@@ -167,7 +167,7 @@ def clean_outages_df(df_outages):
     df_outages_clean = pd.DataFrame()
 
     df_outages_clean['Incident'] = df_outages.agg(lambda x: f"<a href=\"{x['incident_url']}\" target=\"_blank\">{x['incident_id']}</a>", axis=1)
-    df_outages_clean['Received Time'] = pd.to_datetime(df_outages['received_time']).dt.strftime('%Y-%m-%d %H:%M').fillna('Unknown')
+    df_outages_clean['Estimated Start Time'] = pd.to_datetime(df_outages['received_time']).dt.strftime('%Y-%m-%d %H:%M').fillna('Unknown')
     df_outages_clean['Estimated Restored Time'] = pd.to_datetime(df_outages['estimated_restored_time']).dt.strftime('%Y-%m-%d %H:%M').fillna('Unknown')
     df_outages_clean['Postcodes Impacted'] = df_outages['postcodes_impacted'].str.join(', ')
     df_outages_clean['Operator'] = df_outages['dno'].str.upper()
