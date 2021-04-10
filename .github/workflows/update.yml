@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.7'
         
-      - name: Running pipeline
+      - name: Update outages
         shell: bash
         run: |
           python -m pip install --upgrade pip
