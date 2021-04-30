@@ -1,0 +1,1242 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.1">
+    
+    
+      
+        <title>Outage Watch</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.9299cb39.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ef6f36e2.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#outage-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Outage Watch" class="md-header__button md-logo" aria-label="Outage Watch" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Outage Watch
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/OSUKED/Outage-Watch/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OSUKED/Outage-Watch
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="." class="md-tabs__link md-tabs__link--active">
+      Home
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Outage Watch" class="md-nav__button md-logo" aria-label="Outage Watch" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Outage Watch
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/OSUKED/Outage-Watch/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OSUKED/Outage-Watch
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#incidents" class="md-nav__link">
+    Incidents
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#incidents" class="md-nav__link">
+    Incidents
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/OSUKED/Outage-Watch/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="outage-map">Outage Map</h1>
+<style type="text/css">
+#map {
+    width: 600px;
+    height: 500px;
+    margin: 0;
+}
+</style>
+
+<div id="map"></div>
+
+<p><br></p>
+<h2 id="incidents">Incidents</h2>
+<p><a class="md-button" href="data/outages.csv">Download</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">Incident</th>
+<th align="left">Estimated Start Time</th>
+<th align="left">Estimated Restored Time</th>
+<th align="left">Postcodes Impacted</th>
+<th align="left">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039978</a></td>
+<td align="left">2021-04-30 21:00</td>
+<td align="left">2021-05-01 03:00</td>
+<td align="left">HU3 3AN, HU3 3AQ, HU3 3AR, HU3 3AS, HU3 3EQ, HU3 3AT, HU3 3AU, HU3 3AW, HU3 3DF, HU3 3BB, HU3 3BA, HU3 3BD, HU3 3DA, HU3 3DB, HU3 3BE, HU3 2UF, HU3 3BH, HU3 2UE, HU3 3BG, HU3 3BL, HU3 3BJ, HU3 2QY, HU3 3BZ, HU3 3AG, HU3 3AF, HU3 3AD</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. Work is scheduled to start</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-234085-Z" target="_blank">INCD-234085-Z</a></td>
+<td align="left">2021-04-30 17:22</td>
+<td align="left">2021-04-30 20:30</td>
+<td align="left">AL60LE, AL60LG, AL60HT, AL60JY, AL60LA, AL60LB, AL60LS</td>
+<td align="left">UKPN</td>
+<td align="left">We had to turn off power in your area so our engineers could safely carry out emergency repairs to the network.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-55452-V" target="_blank">INCD-55452-V</a></td>
+<td align="left">2021-04-30 17:08</td>
+<td align="left">2021-04-30 20:30</td>
+<td align="left">BN32AB, BN32AH, BN32DH, BN33FA, BN33FE, BN33JZ, BN33WB, BN34AA, BN34FH, BN33WA, BN33WE</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on a piece of our electrical equipment which controls the power to your home.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.enwl.co.uk/power-cuts/power-cuts-power-cuts-live-power-cut-information-fault-list/fault-list" target="_blank">40812183</a></td>
+<td align="left">2021-04-30 16:58</td>
+<td align="left">2021-04-30 22:58</td>
+<td align="left">BB1 9AU, BB1 9AX, BB1 9AY, BB1 9AZ, BB1 9BA, BB1 9QJ, BB1 9QL, BB1 9QN, BB1 9QP, BB1 9QW, BB1 9RS, BB1 9RX, BB1 9RY</td>
+<td align="left">ENW</td>
+<td align="left">The power cut in your area has been caused by an unexpected incident with the underground cable that provides electricity to your property.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-234090-Z" target="_blank">INCD-234090-Z</a></td>
+<td align="left">2021-04-30 16:51</td>
+<td align="left">Unknown</td>
+<td align="left">SG142EF, SG142BX, SG142DZ, SG142EB</td>
+<td align="left">UKPN</td>
+<td align="left">We had to turn off power in your area so our engineers could safely carry out emergency repairs to the network.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-234089-Z" target="_blank">INCD-234089-Z</a></td>
+<td align="left">2021-04-30 16:36</td>
+<td align="left">Unknown</td>
+<td align="left">IP121AG, IP121BU, IP121DH, IP121DR, IP121DS, IP121DW, IP124AB, IP124AH, IP124AR</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on a piece of our electrical equipment which controls the power to your home.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175983-A</a></td>
+<td align="left">2021-04-30 16:26</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">DH2 1QP, DH2 1EW, DH2 1JB, DH2 1QW, DH2 1JA, DH2 1EN, DH2 1QR, DH2 1UQ, DH2 1QS, DH2 1ER, DH2 1QT, DH2 1SH</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175981-A</a></td>
+<td align="left">2021-04-30 16:21</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">NE22 6DA</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-153674-H" target="_blank">INCD-153674-H</a></td>
+<td align="left">2021-04-30 16:20</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">DE56 2LH, DE56 2LN</td>
+<td align="left">WPD</td>
+<td align="left">Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-12406-A" target="_blank">INCD-12406-A</a></td>
+<td align="left">2021-04-30 16:19</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">GL1 3LG, GL1 3LU, GL2 9AS, GL2 9AY, GL1 3DJ, GL1 3BA, GL2 9RG, GL2 9EH</td>
+<td align="left">WPD</td>
+<td align="left">Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175979-A</a></td>
+<td align="left">2021-04-30 16:18</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">DN4 9AT</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175978-A</a></td>
+<td align="left">2021-04-30 16:11</td>
+<td align="left">2021-04-30 19:15</td>
+<td align="left">HU6 9AL</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175977-A</a></td>
+<td align="left">2021-04-30 16:10</td>
+<td align="left">Unknown</td>
+<td align="left">YO8 8NG</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-261163-J" target="_blank">INCD-261163-J</a></td>
+<td align="left">2021-04-30 16:02</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">IG61PG, IG61PL, IG61PW, IG62DR, IG62DS, IG61PR</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on a piece of our electrical equipment which controls the power to your home.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175976-A</a></td>
+<td align="left">2021-04-30 16:01</td>
+<td align="left">2021-04-30 19:15</td>
+<td align="left">BD5 7BU</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-675-q" target="_blank">INCD-675-q</a></td>
+<td align="left">2021-04-30 15:52</td>
+<td align="left">2021-04-30 17:30</td>
+<td align="left">BS13 8QH, BS13 8QQ, BS13 9EX, BS13 8PX, BS13 8QW, BS13 8QN, BS13 8QL, BS13 8QG, BS13 9EG, BS13 8PU, BS13 8QA, BS13 9BE, BS13 8QJ, BS13 9BQ, BS13 8PY, BS13 9AY, BS13 9EF, BS13 8SE, BS13 9DQ, BS13 9DH, BS13 9DF, BS13 8QD, BS13 8SF, BS13 9DG, BS13 9BG, BS13 9EU, BS13 8QB, BS13 8SG, BS13 8PZ, BS13 8PL, BS13 0BW, BS13 8SQ, BS13 8QP</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175974-A</a></td>
+<td align="left">2021-04-30 15:52</td>
+<td align="left">Unknown</td>
+<td align="left">DN31 2QP</td>
+<td align="left">NP</td>
+<td align="left">Smart Meter Cutout Change In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-234083-Z" target="_blank">INCD-234083-Z</a></td>
+<td align="left">2021-04-30 15:46</td>
+<td align="left">Unknown</td>
+<td align="left">CO77QH, CO77QQ</td>
+<td align="left">UKPN</td>
+<td align="left">We had to turn off power in your area so our engineers could safely carry out emergency repairs to the network.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175971-A</a></td>
+<td align="left">2021-04-30 15:41</td>
+<td align="left">Unknown</td>
+<td align="left">DL1 3JG</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-377260-r" target="_blank">INCD-377260-r</a></td>
+<td align="left">2021-04-30 15:17</td>
+<td align="left">2021-04-30 20:00</td>
+<td align="left">SY233DT</td>
+<td align="left">SP</td>
+<td align="left">We are aware of a fault in your area. If you require more information please call us on: <br>Central and Southern Scotland:  0800 092 9290 . <br> Cheshire, Merseyside, North Wales and North Shropshire: 0800 001 5400.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175965-A</a></td>
+<td align="left">2021-04-30 15:11</td>
+<td align="left">2021-04-30 18:15</td>
+<td align="left">LS12 1DD</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175964-A</a></td>
+<td align="left">2021-04-30 15:08</td>
+<td align="left">2021-04-30 18:15</td>
+<td align="left">LS23 6LQ</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175963-A</a></td>
+<td align="left">2021-04-30 15:04</td>
+<td align="left">Unknown</td>
+<td align="left">LS10 3HX</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175962-A</a></td>
+<td align="left">2021-04-30 15:02</td>
+<td align="left">2021-04-30 18:15</td>
+<td align="left">HU3 6PW</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175959-A</a></td>
+<td align="left">2021-04-30 14:55</td>
+<td align="left">2021-04-30 18:00</td>
+<td align="left">YO25 3TT</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175967-A</a></td>
+<td align="left">2021-04-30 14:54</td>
+<td align="left">2021-04-30 21:00</td>
+<td align="left">HU9 1JS</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175957-A</a></td>
+<td align="left">2021-04-30 14:53</td>
+<td align="left">2021-04-30 18:00</td>
+<td align="left">HD5 9SF</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4800</a></td>
+<td align="left">2021-04-30 14:35</td>
+<td align="left">2021-04-30 17:30</td>
+<td align="left">PO15 5DS, PO15 6DG, PO15 6DQ, PO15 6PR, PO16 0TH</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4800'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175952-A</a></td>
+<td align="left">2021-04-30 14:33</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">DL17 9EP</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175946-A</a></td>
+<td align="left">2021-04-30 14:13</td>
+<td align="left">Unknown</td>
+<td align="left">WF2 8BE</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175943-A</a></td>
+<td align="left">2021-04-30 14:02</td>
+<td align="left">2021-04-30 17:15</td>
+<td align="left">DL14 7TW</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175941-A</a></td>
+<td align="left">2021-04-30 13:56</td>
+<td align="left">2021-04-30 17:00</td>
+<td align="left">DL4 2EY</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175936-A</a></td>
+<td align="left">2021-04-30 13:35</td>
+<td align="left">Unknown</td>
+<td align="left">HD8 9EH</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175932-A</a></td>
+<td align="left">2021-04-30 13:22</td>
+<td align="left">Unknown</td>
+<td align="left">LS6 2TZ</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4836</a></td>
+<td align="left">2021-04-30 13:19</td>
+<td align="left">2021-04-30 17:30</td>
+<td align="left">SO43 7FD, SO43 7FE</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4836'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-377092-r" target="_blank">INCD-377092-r</a></td>
+<td align="left">2021-04-30 13:18</td>
+<td align="left">2021-04-30 19:30</td>
+<td align="left">CW60NB, CW60ND, CW60NE, CW60NF, CW60NG, CW60PG, CW60PH, CW60PL, CW60PQ</td>
+<td align="left">SP</td>
+<td align="left">There is a power cut in the CW6 postcode area of Willington, affecting properties in Chapel Lane, Gooseberry Lane, Willington Corner and surrounding areas. We had no advance warning of this and only became aware of it at  1:18 PM. Repairs are taking longer than expected because of ongoing investigations on site and our team are now working to get your power back on as quickly and as safely as possible by 8:30 PM. We will update this message if this information changes. We apologise for the inconvenience and thank you for your patience. This message was updated at 4: 24 PM on 30th April 2021.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4823</a></td>
+<td align="left">2021-04-30 13:05</td>
+<td align="left">2021-04-30 20:00</td>
+<td align="left">SO32 3NT, SO32 3PG, SO32 3QU, SO32 3QW, SO32 3QX, SO32 3QY</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4823'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-358943-G" target="_blank">INCD-358943-G</a></td>
+<td align="left">2021-04-30 13:05</td>
+<td align="left">2021-04-30 18:30</td>
+<td align="left">B65 9PX, B65 9PN, B65 9PW, B65 9PL</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.enwl.co.uk/power-cuts/power-cuts-power-cuts-live-power-cut-information-fault-list/fault-list" target="_blank">10647339</a></td>
+<td align="left">2021-04-30 13:02</td>
+<td align="left">2021-04-30 19:04</td>
+<td align="left">M15 5ED, M15 5FH, M15 6AF, M15 6AH, M15 6BT, M15 6GH, M15 6GP, M15 6HF</td>
+<td align="left">ENW</td>
+<td align="left">The power cut in your area has been caused by an unexpected incident with the underground cable that provides electricity to your property.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-231300-Z" target="_blank">INCD-231300-Z</a></td>
+<td align="left">2021-04-30 13:00</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">IP265DE, IP265ES, IP265ET, IP270RB, IP270SE</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175914-A</a></td>
+<td align="left">2021-04-30 12:37</td>
+<td align="left">Unknown</td>
+<td align="left">LS9 7JE, LS9 7JH, LS9 7HW, LS9 7HU, LS9 7HT, LS9 7HB</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4826</a></td>
+<td align="left">2021-04-30 12:25</td>
+<td align="left">2021-04-30 20:00</td>
+<td align="left">BH21 5RD, BH21 5RE, BH21 5RF, BH21 5RG, BH21 5RH, BH21 5RQ</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4826'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-672-q" target="_blank">INCD-672-q</a></td>
+<td align="left">2021-04-30 12:22</td>
+<td align="left">2021-04-30 17:30</td>
+<td align="left">EX16 4NZ</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175907-A</a></td>
+<td align="left">2021-04-30 12:21</td>
+<td align="left">2021-04-30 19:00</td>
+<td align="left">DN5 0EY</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4797</a></td>
+<td align="left">2021-04-30 12:19</td>
+<td align="left">2021-04-30 22:59</td>
+<td align="left">OX14 3XT, OX14 3XY, OX14 3YG</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4797'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175900-A</a></td>
+<td align="left">2021-04-30 12:11</td>
+<td align="left">2021-04-30 18:00</td>
+<td align="left">NE23 1PJ</td>
+<td align="left">NP</td>
+<td align="left">Damaged service U/G In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-569923-s" target="_blank">INCD-569923-s</a></td>
+<td align="left">2021-04-30 12:11</td>
+<td align="left">2021-04-30 19:00</td>
+<td align="left">ML41AG, ML41AQ, ML41RD, ML41RE, ML41RH, ML42EB, ML43DG, ML43DN, ML43DQ, ML43PH</td>
+<td align="left">SP</td>
+<td align="left">This is a message for customers in the ML4 postcode area of Bellshill. It is necessary for our engineers to carry out an emergency shutdown at 6:00pm to repair faulty electrical equipment outside 44 Glebe Street and this may affect the supply to your property. We will work to get your power back on as quickly and as safely as possible by 8:00pm. We will update this message if this information changes. We apologise for the inconvenience and thank you for your patience. This message was updated at 5:20pm on 30th April 2021.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175890-A</a></td>
+<td align="left">2021-04-30 11:59</td>
+<td align="left">Unknown</td>
+<td align="left">DL12 0XF</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-234006-Z" target="_blank">INCD-234006-Z</a></td>
+<td align="left">2021-04-30 11:47</td>
+<td align="left">2021-04-30 20:30</td>
+<td align="left">PE147PF, PE147QP, PE147PE</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on an underground electricity cable affecting the local area.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4765</a></td>
+<td align="left">2021-04-30 11:44</td>
+<td align="left">2021-04-30 21:00</td>
+<td align="left">SO23 7FB, SO23 7FG, SO23 7FP, SO23 7LF, SO23 7LG, SO23 7LH, SO23 7QU, SO23 7QX, SO23 7XL</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4765'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-249060-G" target="_blank">INCD-249060-G</a></td>
+<td align="left">2021-04-30 11:40</td>
+<td align="left">2021-04-30 18:00</td>
+<td align="left">TN210AA, TN210AB, TN210DQ, TN218JB, TN218JF, TN218JQ, TN218JT, TN218LB, TN218LD, TN218LG, TN218LH, TN218LN, TN210EH</td>
+<td align="left">UKPN</td>
+<td align="left">We were investigating an electricity cable that was damaged, causing a power cut in the local area.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-45164-D" target="_blank">INCD-45164-D</a></td>
+<td align="left">2021-04-30 11:10</td>
+<td align="left">2021-04-30 21:00</td>
+<td align="left">NG12 5DU, NG12 5DW, NG12 5DR, NG12 5DS, NG12 5DP, NG12 5DX, NG12 5DL, NG12 5DT</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175858-A</a></td>
+<td align="left">2021-04-30 11:03</td>
+<td align="left">Unknown</td>
+<td align="left">HD5 9LQ</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-230599-Z" target="_blank">INCD-230599-Z</a></td>
+<td align="left">2021-04-30 11:02</td>
+<td align="left">2021-04-30 12:00</td>
+<td align="left">PE45DE, PE45DF, PE45DG, PE45DJ, PE45DL, PE45DP, PE45DR</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-6150-Q" target="_blank">INCD-6150-Q</a></td>
+<td align="left">2021-04-30 10:54</td>
+<td align="left">2021-04-30 19:00</td>
+<td align="left">HR9 5SP</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-507735-f" target="_blank">INCD-507735-f</a></td>
+<td align="left">2021-04-30 10:41</td>
+<td align="left">Unknown</td>
+<td align="left">FK136PW, FK136PY, FK136PZ, FK136QB, FK136QD, FK136QE, FK136QF, FK136QG, FK136QH</td>
+<td align="left">SP</td>
+<td align="left">We are aware of a fault in your area. If you require more information please call us on: <br>Central and Southern Scotland:  0800 092 9290 . <br> Cheshire, Merseyside, North Wales and North Shropshire: 0800 001 5400.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175842-A</a></td>
+<td align="left">2021-04-30 10:31</td>
+<td align="left">Unknown</td>
+<td align="left">BD8 7QH</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-376924-r" target="_blank">INCD-376924-r</a></td>
+<td align="left">2021-04-30 10:26</td>
+<td align="left">2021-04-30 19:00</td>
+<td align="left">LL303NU, LL303NY, LL303PG, LL303RA, LL303RG, LL303RN, LL303RW</td>
+<td align="left">SP</td>
+<td align="left">There is a power cut in the LL30 postcode area of Penryhn Bay affecting a number of properties in the local area. Our emergency response team has managed to restore power to a number of properties, and we are working to restore power for those customers still off supply. Repairs are taking longer than expected because our engineers are investigating a suspected second fault on the network. Our team are now working to get the power back on as quickly and as safely as possible by 8:00pm. We will update this message if this information changes. We apologise for the inconvenience and thank you for your patience. This message was updated at 2:00pm on 30th April 2021.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175841-A</a></td>
+<td align="left">2021-04-30 10:18</td>
+<td align="left">2021-04-30 21:00</td>
+<td align="left">NE29 0AA, NE29 0LW, NE30 1PT, NE29 0HQ, NE29 0HT, NE29 0LU, NE29 0AE, NE29 0LT, NE29 0LS, NE30 2RJ</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-417125-E" target="_blank">INCD-417125-E</a></td>
+<td align="left">2021-04-30 10:16</td>
+<td align="left">2021-04-30 18:00</td>
+<td align="left">TF4 3GN, TF4 3AS</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-230821-Z" target="_blank">INCD-230821-Z</a></td>
+<td align="left">2021-04-30 09:58</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">PE285LL</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175835-A</a></td>
+<td align="left">2021-04-30 09:56</td>
+<td align="left">2021-04-30 17:30</td>
+<td align="left">YO7 3BU, YO7 1SS, YO7 1DQ, YO7 1DG, YO7 1DH, YO7 3AA</td>
+<td align="left">NP</td>
+<td align="left">U/G LV CONSAC Repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-376876-r" target="_blank">INCD-376876-r</a></td>
+<td align="left">2021-04-30 09:55</td>
+<td align="left">2021-04-30 14:16</td>
+<td align="left">CH49BR, CH49XX</td>
+<td align="left">SP</td>
+<td align="left">We are aware of a fault in your area. If you require more information please call us on: <br>Central and Southern Scotland:  0800 092 9290 . <br> Cheshire, Merseyside, North Wales and North Shropshire: 0800 001 5400.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4682</a></td>
+<td align="left">2021-04-30 09:53</td>
+<td align="left">2021-04-30 19:00</td>
+<td align="left">BH12 4EL, BH12 4EP, BH12 4EW</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4682'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-231429-Z" target="_blank">INCD-231429-Z</a></td>
+<td align="left">2021-04-30 09:42</td>
+<td align="left">2021-04-30 12:30</td>
+<td align="left">NR189ED</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-6336-O" target="_blank">INCD-6336-O</a></td>
+<td align="left">2021-04-30 09:37</td>
+<td align="left">2021-04-30 15:30</td>
+<td align="left">CO160AA, CO160AJ, CO160AL, CO160DU, CO160LD, CO160LE, CO169AP, CO169AR, UK</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-229907-Z" target="_blank">INCD-229907-Z</a></td>
+<td align="left">2021-04-30 09:33</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">IP60AB, IP60AD, IP60AE, IP60AF, IP60AJ, IP60AL, IP60AW, IP60BZ</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-54001-V" target="_blank">INCD-54001-V</a></td>
+<td align="left">2021-04-30 09:31</td>
+<td align="left">2021-04-30 14:30</td>
+<td align="left">ME195EG</td>
+<td align="left">UKPN</td>
+<td align="left">A third party has requested that UK Power Networks switch off the power to allow them to carry out tree trimming safely around our overhead electricity cables. This work will ensure that the trees are trimmed to their satisfaction and are not close to our overhead electricity cables. When the third party has completed their works our engineers will be able to restore power. This will also reduce the possibility of you having an unplanned power cut by stopping these trees from potentially causing damage to our overhead electricity network. This is why it is important to complete this during the Coronavirus pandemic. This work is taking place on Coldrum Lane. The government has given exemptions to certain industries and activities, this outage falls into this category.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-358923-G" target="_blank">INCD-358923-G</a></td>
+<td align="left">2021-04-30 09:14</td>
+<td align="left">2021-04-30 20:30</td>
+<td align="left">B17 9NP, B17 9QE, B17 9QG</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-54445-V" target="_blank">INCD-54445-V</a></td>
+<td align="left">2021-04-30 09:10</td>
+<td align="left">2021-04-30 14:30</td>
+<td align="left">RH89DD, RH89DE</td>
+<td align="left">UKPN</td>
+<td align="left">A third party has requested that UK Power Networks switch off the power to allow them to carry out tree trimming safely around our overhead electricity cables. This work will ensure that the trees are trimmed to their satisfaction and are not close to our overhead electricity cables. When the third party has completed their works our engineers will be able to restore power. This will also reduce the possibility of you having an unplanned power cut by stopping these trees from potentially causing damage to our overhead electricity network. This is why it is important to complete this during the Coronavirus pandemic. This work is taking place on Mill Lane. The government has given exemptions to certain industries and activities, this outage falls into this category.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-231094-Z" target="_blank">INCD-231094-Z</a></td>
+<td align="left">2021-04-30 09:10</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">PE289DH, PE289DN, PE289DQ</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-229719-Z" target="_blank">INCD-229719-Z</a></td>
+<td align="left">2021-04-30 09:05</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">IP214BU, IP214BX</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-231427-Z" target="_blank">INCD-231427-Z</a></td>
+<td align="left">2021-04-30 09:02</td>
+<td align="left">2021-04-30 13:30</td>
+<td align="left">NR189PP</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-54265-V" target="_blank">INCD-54265-V</a></td>
+<td align="left">2021-04-30 09:02</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">CT140HS</td>
+<td align="left">UKPN</td>
+<td align="left">Our contractors Avidety Ltd are replacing and upgrading electricity poles due to them decaying. Along with replacing and upgrading some overhead electricity cables with improved insulated cables. This will improve the reliability of the electricity network and will reduce the risk of you having an unplanned power cut which is why it is important to complete this work during the Coronavirus pandemic. You may see our contractors completing preparation works prior to the outage to allow for a shorter interruption on the day of the planned power cut. This work is taking place in and around Little Mongeham. The government has given exemptions to certain industries and activities, this outage falls into this category.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-6400-O" target="_blank">INCD-6400-O</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 13:00</td>
+<td align="left">NR94AE, NR94AJ, NR94BZ, NR94EE, NR94EJ, NR94EP, NR94ES, NR94EW, NR94GA</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-230652-Z" target="_blank">INCD-230652-Z</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 14:30</td>
+<td align="left">LU62PN, LU62PP, LU62PW, LU63RA, UK</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-232336-Z" target="_blank">INCD-232336-Z</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 13:00</td>
+<td align="left">CB61LT, CB61NT, CB74TA</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039992</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 13:00</td>
+<td align="left">HX2 6BX, HX2 6BY, HX2 6DD, HX2 8TX, HX2 6DA, HX2 6SJ, HX2 6BZ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement of poles that support our overhead power lines in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-229646-Z" target="_blank">INCD-229646-Z</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 14:00</td>
+<td align="left">SG193BP, SG193DN, SG193EA</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039895</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 13:00</td>
+<td align="left">DN3 3JF, DN3 3JG, DN3 3AF, DN3 3DH, DN3 3AG, DN3 3DL, DN3 3BW, DN3 3TN, DN3 3JE</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement of poles that support our overhead power lines in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC040111</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 12:30</td>
+<td align="left">WF7 6HG, WF7 6HQ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039881</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 12:00</td>
+<td align="left">YO25 5UP</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-230847-Z" target="_blank">INCD-230847-Z</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">NR161DS</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-260168-J" target="_blank">INCD-260168-J</a></td>
+<td align="left">2021-04-30 09:00</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">NW19UG</td>
+<td align="left">UKPN</td>
+<td align="left">We're carrying out planned work in your area. For our engineers to carry it out safely they need to turn the power off. We're doing this work as it's essential to provide reliable electricity supplies to your area. We're sorry for any inconvenience caused and thank you for your patience.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039939</a></td>
+<td align="left">2021-04-30 08:30</td>
+<td align="left">2021-04-30 10:30</td>
+<td align="left">TS2 1DD, TS2 1DT, TS9 5DZ, TS1 5LB</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039924</a></td>
+<td align="left">2021-04-30 08:30</td>
+<td align="left">2021-04-30 12:00</td>
+<td align="left">YO32 2NB</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4627</a></td>
+<td align="left">2021-04-30 08:09</td>
+<td align="left">Unknown</td>
+<td align="left">IV3 8AE, IV3 8DU, IV3 8EA, IV3 8EX</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on their way to site to get the power back on as quickly as they can. please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4627'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039865</a></td>
+<td align="left">2021-04-30 08:00</td>
+<td align="left">2021-04-30 11:00</td>
+<td align="left">YO17 8BQ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to undertake vegetation management in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC040043</a></td>
+<td align="left">2021-04-30 08:00</td>
+<td align="left">2021-04-30 12:00</td>
+<td align="left">TS13 4AJ, TS13 4AN, TS13 4AQ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement of poles that support our overhead power lines in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039688</a></td>
+<td align="left">2021-04-30 08:00</td>
+<td align="left">2021-04-30 10:00</td>
+<td align="left">HX2 8PF, HX2 8PE, HX2 8PD</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out maintenance on our network in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039811</a></td>
+<td align="left">2021-04-30 08:00</td>
+<td align="left">2021-04-30 15:30</td>
+<td align="left">BD21 5QF, BD21 5QE, BD21 5HL, BD22 9AQ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement of poles that support our overhead power lines in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC039882</a></td>
+<td align="left">2021-04-30 08:00</td>
+<td align="left">2021-04-30 15:00</td>
+<td align="left">LS21 3DG</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement work on our overhead power lines in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175786-A</a></td>
+<td align="left">2021-04-30 07:46</td>
+<td align="left">2021-04-30 17:00</td>
+<td align="left">TS10 1EE, TS10 3ED</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ssen.co.uk/Powertrack/" target="_blank">HC4584</a></td>
+<td align="left">2021-04-30 07:06</td>
+<td align="left">2021-04-30 17:00</td>
+<td align="left">BH18 8NH, BH18 8NJ, BH18 8NZ</td>
+<td align="left">SSEN</td>
+<td align="left">We’re sorry for the loss of supply. We currently have a fault affecting the areas listed. Our engineers are on site working hard to get the power back on as quickly as they can. If you need more information, please call us on 105 or send us a message on <a href="http://m.me/ssencommunity/">Facebook</a> or Twitter (<a href="https://twitter.com/ssencommunity">@ssencommunity</a>) and quote reference 'HC4584'</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-417110-E" target="_blank">INCD-417110-E</a></td>
+<td align="left">2021-04-30 06:45</td>
+<td align="left">Unknown</td>
+<td align="left">ST6 1AT</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-175771-A</a></td>
+<td align="left">2021-04-30 06:39</td>
+<td align="left">2021-04-30 17:00</td>
+<td align="left">BD4 7AL, BD4 7BG, BD4 7AP, BD4 7BQ</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-248931-G" target="_blank">INCD-248931-G</a></td>
+<td align="left">2021-04-29 09:41</td>
+<td align="left">Unknown</td>
+<td align="left">RH135RU, RH135QR, RH135RS, RH135RT</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on an underground electricity cable affecting the local area.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.spenergynetworks.co.uk/pages/power_cuts_map.aspx?incRef=INCD-376510-r" target="_blank">INCD-376510-r</a></td>
+<td align="left">2021-04-29 09:35</td>
+<td align="left">2021-05-01 07:00</td>
+<td align="left">L318BX</td>
+<td align="left">SP</td>
+<td align="left">We are aware of a fault in your area. If you require more information please call us on: <br>Central and Southern Scotland:  0800 092 9290 . <br> Cheshire, Merseyside, North Wales and North Shropshire: 0800 001 5400.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-233718-Z" target="_blank">INCD-233718-Z</a></td>
+<td align="left">2021-04-29 08:30</td>
+<td align="left">Unknown</td>
+<td align="left">HA87AA</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on an underground electricity cable affecting the local area.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-153567-H" target="_blank">INCD-153567-H</a></td>
+<td align="left">2021-04-28 16:00</td>
+<td align="left">2021-04-30 18:30</td>
+<td align="left">CV47 8JZ, CV47 8LA, CV47 8JX</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-55321-V" target="_blank">INCD-55321-V</a></td>
+<td align="left">2021-04-28 13:38</td>
+<td align="left">Unknown</td>
+<td align="left">GU14RY, GU14SG, GU14SQ, GU14YN</td>
+<td align="left">UKPN</td>
+<td align="left">A fault occurred on an underground electricity cable affecting the local area.</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-173787-A</a></td>
+<td align="left">2021-04-22 17:17</td>
+<td align="left">2021-05-04 12:30</td>
+<td align="left">TS1 1LP</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-173599-A</a></td>
+<td align="left">2021-04-22 07:43</td>
+<td align="left">Unknown</td>
+<td align="left">DN8 5RY</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-173066-A</a></td>
+<td align="left">2021-04-20 11:41</td>
+<td align="left">Unknown</td>
+<td align="left">S6 6LG</td>
+<td align="left">NP</td>
+<td align="left">HV Restoration Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.ukpowernetworks.co.uk/power-cut/map?incidentid=INCD-223551-Z" target="_blank">INCD-223551-Z</a></td>
+<td align="left">2021-03-09 11:47</td>
+<td align="left">Unknown</td>
+<td align="left">NR93JH, NR93JJ, NR93JP, NR93JR, NR93JT, NR93JQ</td>
+<td align="left">UKPN</td>
+<td align="left">We were investigating an overhead electricity line fault which caused a power cut in the local area.</td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.instant", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.7353b375.min.js"></script>
+      
+        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+      
+        <script src="map.js"></script>
+      
+    
+  </body>
+</html>
