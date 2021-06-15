@@ -1,10 +1,6 @@
 name: "outages-update"
 
-on: 
-  workflow_dispatch:
-  schedule:
-    - cron: "*/30 * * * *"
-
+on: workflow_dispatch
 
 jobs:
   miniconda:
