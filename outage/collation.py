@@ -25,9 +25,12 @@ def collate_cleaned_incidents_info(dnos=['ukpn', 'ssen', 'wpd', 'sp', 'np', 'enw
     cleaned_incidents_info = dict()
 
     for dno in track(dnos, label='DNOs'):
-        raw_dno_incidents_info, cleaned_dno_incidents_info = getattr(retrieval, f'get_{dno}_incidents_info')()
-        cleaned_incidents_info[dno] = cleaned_dno_incidents_info
-        retrieval.save_json_data(raw_dno_incidents_info, f'{dno}_incidents_info')
+        try:
+           raw_dno_incidents_info, cleaned_dno_incidents_info = getattr(retrieval, f'get_{dno}_incidents_info')()
+           cleaned_incidents_info[dno] = cleaned_dno_incidents_info
+           retrieval.save_json_data(raw_dno_incidents_info, f'{dno}_incidents_info')
+        except:
+           warn(f'Failed to process {dno}')
 
     return cleaned_incidents_info
 
