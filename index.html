@@ -1,0 +1,1082 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.1">
+    
+    
+      
+        <title>Outage Watch</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.9299cb39.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.ef6f36e2.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="">
+  
+    
+    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#outage-map" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Outage Watch" class="md-header__button md-logo" aria-label="Outage Watch" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Outage Watch
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/OSUKED/Outage-Watch/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OSUKED/Outage-Watch
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="." class="md-tabs__link md-tabs__link--active">
+      Home
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Outage Watch" class="md-nav__button md-logo" aria-label="Outage Watch" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Outage Watch
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/OSUKED/Outage-Watch/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OSUKED/Outage-Watch
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Home
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#incidents" class="md-nav__link">
+    Incidents
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#incidents" class="md-nav__link">
+    Incidents
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/OSUKED/Outage-Watch/edit/main/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="outage-map">Outage Map</h1>
+<style type="text/css">
+#map {
+    width: 600px;
+    height: 500px;
+    margin: 0;
+}
+</style>
+
+<div id="map"></div>
+
+<p><br></p>
+<h2 id="incidents">Incidents</h2>
+<p><a class="md-button" href="data/outages.csv">Download</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">Incident</th>
+<th align="left">Estimated Start Time</th>
+<th align="left">Estimated Restored Time</th>
+<th align="left">Postcodes Impacted</th>
+<th align="left">Operator</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282633-A</a></td>
+<td align="left">2022-03-29 12:47</td>
+<td align="left">2022-03-29 16:00</td>
+<td align="left">NE66 3EY</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282621-A</a></td>
+<td align="left">2022-03-29 12:35</td>
+<td align="left">Unknown</td>
+<td align="left">LS29 0AL</td>
+<td align="left">NP</td>
+<td align="left">Damage Other In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC043928</a></td>
+<td align="left">2022-03-29 12:30</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">DN9 1TZ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement work on our overhead power lines in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282623-A</a></td>
+<td align="left">2022-03-29 12:30</td>
+<td align="left">2022-03-29 15:45</td>
+<td align="left">S36 1FR, S30 5QP, S36 1QP, S36 1ER, S36 1AW</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282607-A</a></td>
+<td align="left">2022-03-29 12:24</td>
+<td align="left">2022-03-29 15:30</td>
+<td align="left">BD18 4RD</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-16118-b" target="_blank">INCD-16118-b</a></td>
+<td align="left">2022-03-29 12:24</td>
+<td align="left">2022-03-29 16:00</td>
+<td align="left">SY10 8PG, SY10 8PJ, SY10 8PE, SY10 8PN, SY10 8PH, SY10 8PF, SY10 8PL, SY10 8PD, SY10 8PQ, SY5 9AL, SY10 8PB, SY22 6NW, SY22 6NR</td>
+<td align="left">WPD</td>
+<td align="left">Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282604-A</a></td>
+<td align="left">2022-03-29 12:22</td>
+<td align="left">Unknown</td>
+<td align="left">DN6 7FB</td>
+<td align="left">NP</td>
+<td align="left">Damage Other In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282595-A</a></td>
+<td align="left">2022-03-29 12:14</td>
+<td align="left">2022-03-29 15:15</td>
+<td align="left">WF16 0JD</td>
+<td align="left">NP</td>
+<td align="left">DNO Energisation check In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282588-A</a></td>
+<td align="left">2022-03-29 12:10</td>
+<td align="left">2022-03-29 15:15</td>
+<td align="left">WF11 9HR</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23347-c" target="_blank">INCD-23347-c</a></td>
+<td align="left">2022-03-29 12:10</td>
+<td align="left">2022-03-29 13:30</td>
+<td align="left">HR2 7JS, HR2 7JF</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282578-A</a></td>
+<td align="left">2022-03-29 12:00</td>
+<td align="left">Unknown</td>
+<td align="left">LS18 4PP</td>
+<td align="left">NP</td>
+<td align="left">Damaged service U/G In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-14488-h" target="_blank">INCD-14488-h</a></td>
+<td align="left">2022-03-29 11:58</td>
+<td align="left">2022-03-29 14:45</td>
+<td align="left">SA15 5UB, SA15 5UG, SA15 5UD, SA15 5UJ, SA15 5UH</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282576-A</a></td>
+<td align="left">2022-03-29 11:58</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">DH3 2JP</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282575-A</a></td>
+<td align="left">2022-03-29 11:50</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">S64 9BH</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282592-A</a></td>
+<td align="left">2022-03-29 11:49</td>
+<td align="left">2022-03-29 15:15</td>
+<td align="left">YO13 9AF, YO13 9AG, YO13 9BD, YO13 9AE, YO13 9BG, YO13 9AJ, YO13 9AH</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282573-A</a></td>
+<td align="left">2022-03-29 11:47</td>
+<td align="left">2022-03-29 16:15</td>
+<td align="left">HX6 4BP</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282572-A</a></td>
+<td align="left">2022-03-29 11:46</td>
+<td align="left">2022-03-29 17:00</td>
+<td align="left">DL15 0TB</td>
+<td align="left">NP</td>
+<td align="left">O/H Service Repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23342-c" target="_blank">INCD-23342-c</a></td>
+<td align="left">2022-03-29 11:45</td>
+<td align="left">2022-03-29 18:00</td>
+<td align="left">DY12 2EX, DY12 2ET, DY12 2EY</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23341-c" target="_blank">INCD-23341-c</a></td>
+<td align="left">2022-03-29 11:40</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">GL14 3DY, GL14 3BE, GL14 3AW, GL14 3DT, GL14 3AT, GL14 3AY, GL14 3HS, GL14 3AS, GL14 3DZ, GL14 3AX, GL14 3AR, GL14 3EA</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-25802-m" target="_blank">INCD-25802-m</a></td>
+<td align="left">2022-03-29 11:39</td>
+<td align="left">2022-03-29 16:00</td>
+<td align="left">DE21 4LS</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044340</a></td>
+<td align="left">2022-03-29 11:30</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">SR8 3QJ, SR8 3QH, SR8 3QQ, SR8 3RR</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement of poles that support our overhead power lines in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282566-A</a></td>
+<td align="left">2022-03-29 11:28</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">S10 1GN</td>
+<td align="left">NP</td>
+<td align="left">U/G Service repair In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282565-A</a></td>
+<td align="left">2022-03-29 11:27</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">HD2 1HX</td>
+<td align="left">NP</td>
+<td align="left">DNO Energisation check Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23336-c" target="_blank">INCD-23336-c</a></td>
+<td align="left">2022-03-29 11:24</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">WV4 5RU, WV4 5RX</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282561-A</a></td>
+<td align="left">2022-03-29 11:23</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">HD9 2RG</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282562-A</a></td>
+<td align="left">2022-03-29 11:23</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">NE16 5QS</td>
+<td align="left">NP</td>
+<td align="left">Unknown P2 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-20741-B</a></td>
+<td align="left">2022-03-29 11:16</td>
+<td align="left">2022-03-29 15:30</td>
+<td align="left">HU8 7SZ, HU8 7RL, HU8 7ST, HU8 7SU, HU8 7SX</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282555-A</a></td>
+<td align="left">2022-03-29 11:07</td>
+<td align="left">Unknown</td>
+<td align="left">SR2 0QR</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-10806-s" target="_blank">INCD-10806-s</a></td>
+<td align="left">2022-03-29 11:06</td>
+<td align="left">2022-03-29 15:05</td>
+<td align="left">BS40 5DN, BS40 5DQ, BS40 5DH</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282553-A</a></td>
+<td align="left">2022-03-29 11:02</td>
+<td align="left">2022-03-29 16:30</td>
+<td align="left">YO7 2DJ, YO7 2NU, YO7 2DL, YO7 2DN, YO7 2DP, YO7 2NX, YO7 2DF, DL15 0UT, YO7 2DG, YO7 1JS, YO7 2QA, YO7 2QE, YO7 2QD, YO7 2QB, YO7 2EW, YO7 3TY, YO7 2PL, YO7 2EX, YO7 2PJ, YO7 1FA, YO7 2ES, YO7 2PG, YO7 2AW, YO7 2ER, YO7 2PH, YO7 2EU, YO7 2ET, YO7 2PF, YO7 2AT, YO7 2PA, YO7 2AN, YO7 2AQ, YO7 3AF, YO7 1JY, YO7 3AE, YO7 2PZ, YO7 3AG, YO7 2PY, YO7 2PX, YO7 2PW, YO7 2PU, YO7 2PT, YO7 4AH, YO7 2PS, YO7 2PR, YO7 2PQ, YO7 3AB, YO7 2PP, YO7 3AA, YO7 3AD, YO7 2PN, YO7 2DW, YO7 2DT, YO7 2DS, YO7 2DR, YO7 2DQ, YO7 3AQ, YO7 2DY, YO7 2AL, YO7 2EF, YO7 2AJ, YO7 2EG, YO7 2ED, YO7 2EE, YO7 2AG, YO7 2AF, YO7 2AE, YO7 2EP, YO7 2AD, YO7 2EN, YO7 2AB, YO7 2AA</td>
+<td align="left">NP</td>
+<td align="left">HV Restoration Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282545-A</a></td>
+<td align="left">2022-03-29 10:48</td>
+<td align="left">Unknown</td>
+<td align="left">NE11 0AP</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-20740-B</a></td>
+<td align="left">2022-03-29 10:43</td>
+<td align="left">2022-03-29 13:30</td>
+<td align="left">S11 8YE</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282543-A</a></td>
+<td align="left">2022-03-29 10:42</td>
+<td align="left">Unknown</td>
+<td align="left">DH6 2QN</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282542-A</a></td>
+<td align="left">2022-03-29 10:37</td>
+<td align="left">Unknown</td>
+<td align="left">LS7 2DY</td>
+<td align="left">NP</td>
+<td align="left">Smart Meter Cutout Change In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-20739-B</a></td>
+<td align="left">2022-03-29 10:28</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">S70 5DX</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282536-A</a></td>
+<td align="left">2022-03-29 10:06</td>
+<td align="left">Unknown</td>
+<td align="left">S65 1QP</td>
+<td align="left">NP</td>
+<td align="left">Smart Meter Cutout Change In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC043821</a></td>
+<td align="left">2022-03-29 10:00</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">HD8 8YF</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-20738-B</a></td>
+<td align="left">2022-03-29 09:59</td>
+<td align="left">2022-03-29 13:30</td>
+<td align="left">LS6 1LP, LS6 1JJ, LS6 1LR, LS6 1PJ, LS6 1LL, LS6 1LX, LS6 1JR, LS6 1LJ, LS6 1SP, LS6 1LT, LS6 1LU, LS6 1PS, LS6 1PR, LS6 1JY</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-20737-B</a></td>
+<td align="left">2022-03-29 09:56</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">S14 1SB</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282522-A</a></td>
+<td align="left">2022-03-29 09:43</td>
+<td align="left">2022-03-29 15:30</td>
+<td align="left">BD20 7ER</td>
+<td align="left">NP</td>
+<td align="left">Unknown P1 In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282519-A</a></td>
+<td align="left">2022-03-29 09:34</td>
+<td align="left">Unknown</td>
+<td align="left">LS6 1PY, LS4 2HL, LS4 2EU, LS4 2HF, LS4 2HE, LS4 2HG, LS6 1QP, LS6 1QQ, LS6 1QE, LS6 1QA, LS6 1QZ, LS6 1QB, LS6 1QD</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044448</a></td>
+<td align="left">2022-03-29 09:30</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">TS13 5BH, TS13 5BL, TS13 5BQ, TS13 5BG, TS13 5AD, TS13 5DE, TS13 5DG, TS13 5AA, TS13 5DJ, TS13 5DL</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282513-A</a></td>
+<td align="left">2022-03-29 09:22</td>
+<td align="left">Unknown</td>
+<td align="left">TS6 9SB</td>
+<td align="left">NP</td>
+<td align="left">Damaged unmetered In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-20730-B</a></td>
+<td align="left">2022-03-29 09:19</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">HU7 0DY, HU7 0DW</td>
+<td align="left">NP</td>
+<td align="left">Safety Interruption In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-10788-s" target="_blank">INCD-10788-s</a></td>
+<td align="left">2022-03-29 09:07</td>
+<td align="left">2022-03-29 11:00</td>
+<td align="left">EX31 4TT, EX31 4TS</td>
+<td align="left">WPD</td>
+<td align="left">Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044138</a></td>
+<td align="left">2022-03-29 09:00</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">DL15 9QG</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044354</a></td>
+<td align="left">2022-03-29 09:00</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">HG4 5BG, HG4 5BP, HG4 5BS, HG4 5BN, HG4 5BH</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC043927</a></td>
+<td align="left">2022-03-29 09:00</td>
+<td align="left">2022-03-29 11:00</td>
+<td align="left">DN9 1BD</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement work on our overhead power lines in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23307-c" target="_blank">INCD-23307-c</a></td>
+<td align="left">2022-03-29 08:49</td>
+<td align="left">2022-03-29 16:30</td>
+<td align="left">GL1 5EN, GL1 5EH, GL1 5EJ, GL1 5EP, GL1 5EQ, GL1 5EW</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044179</a></td>
+<td align="left">2022-03-29 08:35</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">NE26 1JG, NE26 1JW, NE26 1JH, NE26 1JJ, NE26 1JL, NE26 1JQ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044098</a></td>
+<td align="left">2022-03-29 08:30</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">DL11 6DD, DL11 6DB, DL11 6DF, DL11 6BE, DL11 6BD, DL11 6BW</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044336</a></td>
+<td align="left">2022-03-29 08:30</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">LS21 2QB, LS21 2LF</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement of poles that support our overhead power lines in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044430</a></td>
+<td align="left">2022-03-29 08:30</td>
+<td align="left">2022-03-29 13:30</td>
+<td align="left">YO8 6NT, YO8 6NS, YO8 6PP, YO8 6PF, YO8 6NP, YO8 7NS, YO8 6NN, YO8 6NW, YO8 8QN, YO8 6NZ, YO4 2TS, YO25 5NN</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044176</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">YO62 5LD, YO62 5EW, YO62 5LR, YO62 5LB, YO62 5LA, YO62 5LJ, YO62 5LU</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to undertake vegetation management in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044072</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-04-05 15:00</td>
+<td align="left">S36 4TF, S33 0BR, S31 7FY, S36 4TE, HD9 2RZ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out power upgrades in the area. The scheduled work has been cancelled and is no longer taking place today</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC043967</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">NE61 3DN, NE61 3DH, NE61 3DJ, NE61 3DD, NE61 3DE, NE61 3EB, NE61 3LA, NE61 3DA, NE61 3EA, NE61 3DB, NE61 3DX, NE61 3DW, NE61 3DZ, NE61 3EX, NE61 3DT, NE61 3DS, NE61 3BX, NE61 3BY, NE61 3DP, NE61 3BZ, NE61 3DR, NE61 3DQ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044315</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">S36 4TG, S33 8WU, S36 4TD</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out power upgrades in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044390</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-29 12:00</td>
+<td align="left">HD4 5TL, HD4 5ST</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. The scheduled work has now been completed</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044349</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">NE61 3JL, NE61 3JW, NE61 3RZ</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044322</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-31 13:00</td>
+<td align="left">NE61 5DR, NE61 5EE, NE61 5EB, NE61 3BA, NE61 5QL, NE61 5DL</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044267</a></td>
+<td align="left">2022-03-29 08:00</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">DH5 0QT</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out a permanent repair in the area. The scheduled work has been cancelled and is no longer taking place today</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-14458-h" target="_blank">INCD-14458-h</a></td>
+<td align="left">2022-03-29 07:48</td>
+<td align="left">2022-03-29 13:45</td>
+<td align="left">CF5 5QA, CF5 5RE, CF5 5QR, CF5 5QS, CF5 5QB</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282471-A</a></td>
+<td align="left">2022-03-29 07:44</td>
+<td align="left">2022-03-29 17:30</td>
+<td align="left">DL10 4HY, DL10 4QN</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23855-q" target="_blank">INCD-23855-q</a></td>
+<td align="left">2022-03-29 07:32</td>
+<td align="left">2022-03-29 16:30</td>
+<td align="left">TR19 7JA, TR19 7HZ</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044043</a></td>
+<td align="left">2022-03-29 07:30</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">S81 9QS, S81 9RD, S81 9RB, S81 9QP, S81 9JX, S81 9QW</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to move equipment in order to allow another organisation to work close to our network in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044172</a></td>
+<td align="left">2022-03-29 07:30</td>
+<td align="left">2022-03-30 15:00</td>
+<td align="left">LS26 8AE</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to carry out replacement work at a substation in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044348</a></td>
+<td align="left">2022-03-29 07:00</td>
+<td align="left">2022-03-29 15:30</td>
+<td align="left">NE61 3DG</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">PPC044347</a></td>
+<td align="left">2022-03-29 07:00</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">NE61 3ED, NE61 3DU</td>
+<td align="left">NP</td>
+<td align="left">We need to temporarily turn the power off to connect a new customer in the area. In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23849-q" target="_blank">INCD-23849-q</a></td>
+<td align="left">2022-03-29 06:38</td>
+<td align="left">2022-03-29 14:00</td>
+<td align="left">EX6 8AT, EX6 8TJ, EX6 8AB, EX6 8TL</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23847-q" target="_blank">INCD-23847-q</a></td>
+<td align="left">2022-03-29 06:20</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">EX4 8PN, EX4 8PA, EX4 8NZ, EX4 8PL</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282457-A</a></td>
+<td align="left">2022-03-29 06:19</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">HD7 6HF</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23846-q" target="_blank">INCD-23846-q</a></td>
+<td align="left">2022-03-29 06:15</td>
+<td align="left">2022-03-29 16:00</td>
+<td align="left">TQ14 8FX, TQ14 9DA, TQ14 8FW, TQ14 8HD, TQ14 9BY, TQ14 9BZ, TQ14 9DD, TQ14 9QQ, TQ14 9DQ, TQ14 9EL, TQ14 9DB, TQ14 8HA, TQ14 9DG, TQ14 9EG, TQ14 9DL, TQ14 8HB, TQ14 8EZ, TQ14 9EH, TQ14 8AZ</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282443-A</a></td>
+<td align="left">2022-03-29 06:02</td>
+<td align="left">2022-03-29 16:00</td>
+<td align="left">NE28 6DL</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.enwl.co.uk/power-cuts/power-cuts-power-cuts-live-power-cut-information-fault-list/fault-list" target="_blank">INC 125030428</a></td>
+<td align="left">2022-03-29 06:00</td>
+<td align="left">2022-03-29 14:15</td>
+<td align="left">SK10 4PZ, SK10 4NL, SK10 4NP</td>
+<td align="left">ENW</td>
+<td align="left">This power cut has been caused by an unexpected incident with the underground cable that provides electricity to your home or business. We didn't know before your electricity went off that this was going to happen but now we know, rest assured we will get your power back on safely and as quickly as possible.<br/><br/>Please note that all our time scales are estimated based on previous experience and may change if new information becomes available while our engineers are fixing the issue.  With underground power cut’s, we may need to dig to repair the cable and this can sometime extend the length of time you are without power. Click the link to find out <a class="c-fault-back__link ng-binding" href="/power-cuts/why-do-we-experience-power-cuts/">why power cuts happen</a></td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-25783-m" target="_blank">INCD-25783-m</a></td>
+<td align="left">2022-03-29 05:47</td>
+<td align="left">2022-03-29 14:30</td>
+<td align="left">NG24 1QS</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23288-c" target="_blank">INCD-23288-c</a></td>
+<td align="left">2022-03-29 05:34</td>
+<td align="left">2022-03-29 13:30</td>
+<td align="left">GL2 4UZ</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282429-A</a></td>
+<td align="left">2022-03-29 02:34</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">YO32 5BH, YO32 5YZ, YO32 5UQ, YO32 5UT, YO32 5BE, YO32 5BD, YO32 5YD, YO32 5BG</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282428-A</a></td>
+<td align="left">2022-03-29 02:03</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">WF9 4EG</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-23840-q" target="_blank">INCD-23840-q</a></td>
+<td align="left">2022-03-29 00:19</td>
+<td align="left">2022-03-29 13:00</td>
+<td align="left">TA9 4EA</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282417-A</a></td>
+<td align="left">2022-03-28 22:24</td>
+<td align="left">Unknown</td>
+<td align="left">DN4 8EG</td>
+<td align="left">NP</td>
+<td align="left">DNO Energisation check Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-282340-A</a></td>
+<td align="left">2022-03-28 15:00</td>
+<td align="left">Unknown</td>
+<td align="left">HX3 8JP</td>
+<td align="left">NP</td>
+<td align="left">O/H HV Mains Repair Awaiting</td>
+</tr>
+<tr>
+<td align="left"><a href="https://powercuts.westernpower.co.uk/incident/INCD-19270-q" target="_blank">INCD-19270-q</a></td>
+<td align="left">2022-03-28 11:57</td>
+<td align="left">2022-03-29 15:00</td>
+<td align="left">DE6 3AW</td>
+<td align="left">WPD</td>
+<td align="left">In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-281752-A</a></td>
+<td align="left">2022-03-25 17:49</td>
+<td align="left">Unknown</td>
+<td align="left">LS9 6QN</td>
+<td align="left">NP</td>
+<td align="left">U/G LV Mains Repair (Other) In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-281595-A</a></td>
+<td align="left">2022-03-25 09:42</td>
+<td align="left">2022-03-30 11:00</td>
+<td align="left">TS9 5PQ</td>
+<td align="left">NP</td>
+<td align="left">Damaged service U/G In Progress</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.northernpowergrid.com/power-cuts" target="_blank">INCD-279646-A</a></td>
+<td align="left">2022-03-18 11:30</td>
+<td align="left">Unknown</td>
+<td align="left">YO17 6RL</td>
+<td align="left">NP</td>
+<td align="left">DNO Energisation check Awaiting</td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": ["header.autohide", "navigation.tabs", "navigation.instant", "search.suggest"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.7353b375.min.js"></script>
+      
+        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+      
+        <script src="map.js"></script>
+      
+    
+  </body>
+</html>
