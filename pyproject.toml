@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "outage-watch"
+version = "0.1.0"
+description = "Library for retrieving, parsing, and collating power outage data for the British electricity system."
+authors = ["AyrtonB <ayrtonbourn@outlook.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^1.5.2"
+psycopg2-binary = "^2.9.5"
+loguru = "^0.6.0"
+tqdm = "^4.64.1"
+sqlmodel = "^0.0.8"
+
+[tool.poetry.dev-dependencies]
+ipykernel = "^6.19.2"
+python-dotenv = "^0.21.0"
+black = "22.3.0"
+isort = "5.10.1"
+mypy = "0.971"
+pre-commit = "2.13.0"
+pycln = "2.0.1"
+pytest = "7.1.3"
+
+[tool.isort]
+multi_line_output = 3
+line_length = 88
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
